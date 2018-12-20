@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <title>CrowFunding Application </title>
+    <div th:replace="fragments/header :: header"/>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="row" style="margin-top:20px">
+        <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+            <form th:action="@{/register}" th:object="${register}" method="post">
+                <fieldset>
+                    <h1>Registration Form</h1>
+
+                    <div th:if="${param.error}">
+                        <div class="alert alert-danger">
+                            Invalid username and password.
+                        </div>
+                    </div>
+                    <div th:if="${param.logout}">
+                        <div class="alert alert-info">
+                            You have been logged out.
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="text" name="username" id="username" class="form-control input-lg"
+                               placeholder="Full Name" required="true" autofocus="true" />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" id="password" class="form-control input-lg"
+                               placeholder="Password" required="true"/>
+                    </div>
+                      <div class="form-group">
+                        <input type="password" name="confirmpassword" id="confirmpassword" class="form-control input-lg"
+                               placeholder="Confirm Password" required="true"/>
+                    </div>
+                     <div class="form-group">
+                        <input type="email" name="Email" id="email" class="form-control input-lg"
+                               placeholder="Email" required="true"/>
+                    </div> 
+
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="register"/>
+                        </div>
+                        <br>
+                        <b th:text="${error}"></b>
+                        <div class="col-xs-6 col-sm-6 col-md-6">
+                        </div>
+                    </div>
+                       </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="fragments/singupfooter :: footer"/>
+<script>
+var password = document.getElementById("password"), confirm_password = document.getElementById("confirmpassword");
+
+function validatePassword(){
+if(password.value != confirm_password.value) {
+  confirm_password.setCustomValidity("Passwords Don't Match");
+} else {
+  confirm_password.setCustomValidity('');
+}
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+
+
+</script>
+</body>
+</html>

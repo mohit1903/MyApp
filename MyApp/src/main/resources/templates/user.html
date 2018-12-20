@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="fragments/header :: header"/>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="starter-template">
+        <h1>User page for CrowdFundiing Application</h1>
+         
+        <br>
+        <b th:text="${Welcome}"></b><h1 th:text="${name}"></h1>
+        <form th:action="@{/transaction}" method="post">
+        
+         <a th:href="@{/transaction}">
+            <img alt="Charity" title="Charity"
+                src="../static/images/cf.jpg" width="500" height ="200" th:src="@{images/cf.jpg}"/>
+        </a> &nbsp; &nbsp;
+        <a th:href="@{/transaction}">
+            <img alt="Charity" title="Charity"
+                src="../static/images/cf.jpg" width="500" height ="200" th:src="@{images/cf.jpg}"/>
+        </a>
+        <br>
+        
+        </form>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+
+    </div>
+
+</div>
+<!-- /.container -->
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

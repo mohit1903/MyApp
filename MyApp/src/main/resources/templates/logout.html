@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <div th:replace="fragments/header :: header"/>
+</head>
+<body>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <h1>Hello CrowFunding User</h1>
+    <p>Logout Successfully</p>
+    <ul>
+        <li>Go to the <a href="/" th:href="@{/}">login page</a></li>
+    </ul>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+</body>
+</html>
