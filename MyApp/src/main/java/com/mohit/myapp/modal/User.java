@@ -28,6 +28,8 @@ public class User implements Serializable {
 	private boolean enabled;
 	@Column(name = "confirmation_token")
 	private String confirmationToken;
+	@Column(name = "privilage")
+	private String privilage;
 	
 	public int getId() {
 		return Id;
@@ -69,6 +71,13 @@ public class User implements Serializable {
 	}
 	
 	
+	
+	public String getPrivilage() {
+		return privilage;
+	}
+	public void setPrivilage(String privilage) {
+		this.privilage = privilage;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -79,6 +88,7 @@ public class User implements Serializable {
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + (enabled ? 1231 : 1237);
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((privilage == null) ? 0 : privilage.hashCode());
 		return result;
 	}
 	@Override
@@ -114,8 +124,14 @@ public class User implements Serializable {
 				return false;
 		} else if (!password.equals(other.password))
 			return false;
+		if (privilage == null) {
+			if (other.privilage != null)
+				return false;
+		} else if (!privilage.equals(other.privilage))
+			return false;
 		return true;
 	}
+	
 	
 	
 

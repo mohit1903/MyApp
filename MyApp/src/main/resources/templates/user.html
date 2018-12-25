@@ -8,26 +8,29 @@
 <div class="container">
 
     <div class="starter-template">
-        <h1>User page for CrowdFundiing Application</h1>
-         
-        <br>
-        <b th:text="${Welcome}"></b><h1 th:text="${name}"></h1>
-        <form th:action="@{/transaction}" method="post">
-        
-         <a th:href="@{/transaction}">
+         <h1>Hello <b th:text="${name}"></b> Welcome to our Website</h1>
+        <div class="container">
+<div th:if="${not #lists.isEmpty(events)}">
+<h2> Event List</h2>
+<table border="1" class="table table-stripped">
+ <tr>
+ <th>Event Id</th>
+ <th>Event Name</th>
+ <th>Event Url </th>
+ </tr>
+   
+    <tr th:each = "event: ${events}">
+    <td th:text="${event.eventId}"></td>
+    <td th:text="${event.eventName}"></td>
+    <td><a th:href="@{/transaction}">
             <img alt="Charity" title="Charity"
                 src="../static/images/cf.jpg" width="500" height ="200" th:src="@{images/cf.jpg}"/>
-        </a> &nbsp; &nbsp;
-        <a th:href="@{/transaction}">
-            <img alt="Charity" title="Charity"
-                src="../static/images/cf.jpg" width="500" height ="200" th:src="@{images/cf.jpg}"/>
-        </a>
-        <br>
+        </a></td>
         
-        </form>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
+    </tr>
+</table>
+</div>
+</div>
 
     </div>
 

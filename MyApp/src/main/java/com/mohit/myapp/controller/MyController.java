@@ -1,5 +1,8 @@
 package com.mohit.myapp.controller;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -14,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mohit.myapp.modal.Event;
 import com.mohit.myapp.modal.User;
 import com.mohit.myapp.service.EmailService;
+import com.mohit.myapp.service.EventService;
 import com.mohit.myapp.service.UserService;
 
 import lombok.Synchronized;
@@ -25,13 +30,15 @@ public class MyController {
 	
 	private UserService userService;
 	private EmailService emailService;
+	private EventService eventService;
 	
 	
 	
-	public MyController(UserService userService, EmailService emailService) {
+	public MyController(UserService userService, EmailService emailService, EventService eventService) {
 		super();
 		this.userService = userService;
 		this.emailService = emailService;
+		this.eventService = eventService;
 	}
 	@RequestMapping("/")  
 	public String login() {   
@@ -75,6 +82,13 @@ public String about() {
 			user.setPassword(requestParams.get("password"));
 			user.setEmail(requestParams.get("Email"));
 			User userExists = userService.findByEmail(user.getEmail());
+			if(userService.count()==0l)
+			{
+				user.setPrivilage("admn");
+			}
+			else
+				user.setPrivilage("user");
+			
 			
 			System.out.println(userExists);
 			  
@@ -104,7 +118,7 @@ public String about() {
 				SimpleMailMessage registrationEmail = new SimpleMailMessage();
 				
 				registrationEmail.setTo(user.getEmail());
-				registrationEmail.setSubject("CrowFunding Registration Confirmation");
+				registrationEmail.setSubject("CrowdFunding Registration Confirmation");
 				registrationEmail.setText("To confirm your e-mail address, please click the link below:\n"
 						+ appUrl + "/confirm?token=" + user.getConfirmationToken());
 				registrationEmail.setFrom("mohit190392@gmail.com");
@@ -143,9 +157,24 @@ public String about() {
 			{
 				modelAndView.addObject("Welcome", "Welcome to our CrowFunding Application");
 				modelAndView.addObject("name", users.getName().toUpperCase());
+				if(users.getPrivilage().equals("user"))
+				{
 				modelAndView.setViewName("user");
+				 Iterator<Event> iter = eventService.findallevent().iterator();
+				 List<Event> data=new ArrayList<>();
+				 
+				 while (iter.hasNext()) {
+					 data.add(iter.next());
+
+				 }
+				 modelAndView.addObject("events", data);
+				
+				}
+				else
+			    modelAndView.setViewName("admin");
 				bindingResult.reject("email");
 			}
+			
 			
 			
 			

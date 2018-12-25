@@ -10,11 +10,9 @@
 
         <footer>
         <!-- this is footer -->
-       © MyYApp
-            <span sec:authorize="isAuthenticated()">
-                | Logged user: <span sec:authentication="name"></span> |
-                Roles: <span sec:authentication="principal.authorities"></span> |
-                <a th:href="@{/logout}">Sign Out</a>
+    
+            <span sec:authorize="isAuthenticated()"> 
+              
             </span>
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
