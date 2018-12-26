@@ -11,7 +11,7 @@
     <div class="starter-template">
         <h1>Admin page</h1>
 
-        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+        <h1>Hello <b th:text="${name}"></b> Welcome to our Website</h1>
         <form th:action="@{/addevent}" method="post">
         
            <div class="form-group">
@@ -71,6 +71,14 @@ eventype.onchange = validateEvent;
 
 
 </script>
+
+<SCRIPT type="text/javascript">
+	window.history.forward();
+	function noBack() { window.history.forward(); }
+</SCRIPT>
+</HEAD>
+<BODY onload="noBack();" 
+	onpageshow="if (event.persisted) noBack();" onunload="">
 </body>
 </html>
 

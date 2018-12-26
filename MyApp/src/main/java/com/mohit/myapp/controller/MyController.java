@@ -74,6 +74,7 @@ public String about() {
 		 return "transaction"; 
 		 }
 	 
+	 @Synchronized
 	 @RequestMapping(value = "/register", method = RequestMethod.POST)
 		public ModelAndView register(@RequestParam Map<String,String> requestParams, ModelAndView modelAndView, @Valid User user, BindingResult bindingResult, HttpServletRequest request) {
 		 
