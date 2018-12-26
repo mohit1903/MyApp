@@ -18,6 +18,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 			.antMatchers("/user").access("hasRole('user')")
 			.antMatchers("/admin").access("hasRole('admin')")
+			.antMatchers("/transaction").access("hasRole('user')")
+			.antMatchers("/transaction").access("hasRole('admin')")
+			
 			.and()
 				.formLogin().loginPage("/login")
 				.defaultSuccessUrl("/home")
