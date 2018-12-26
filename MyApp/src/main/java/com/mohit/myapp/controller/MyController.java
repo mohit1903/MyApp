@@ -149,6 +149,9 @@ public String about() {
 			if(users != null && users.getPassword().equals(user.getPassword()))
 				validate=true;
 			if (validate == false) {
+				if(users != null && !users.getPassword().equals(user.getPassword()))
+					modelAndView.addObject("error", "Password is inorrect.");
+				else
 				modelAndView.addObject("error", "Oops!  There is no user registered with the email provided.");
 				modelAndView.setViewName("login");
 				bindingResult.reject("email");
